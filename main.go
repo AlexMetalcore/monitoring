@@ -18,11 +18,11 @@ func main() {
 		time.Sleep(time.Second + 1)
 		currentCPUStats := cpustatistics.GetWorkload()
 		coreStats := cpustatistics.CalcCPUStats(currentCPUStats, previousCPUStats)
-		color.Red("Temperature Processors: %s", coreStats.Temperature)
+		color.Red("Temperature Processor: %s", coreStats.Temperature)
 		fmt.Println()
 
 		for key, item := range coreStats.CoreLoad {
-			color.Green("CPU %d Load: %s \n", key, item)
+			color.Green("CPU Load %d Core: %s \n", key+1, item)
 		}
 
 		fmt.Println()
