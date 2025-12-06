@@ -6,6 +6,8 @@ import (
 	diskinfo "monitoring/internal"
 	memoryinfo "monitoring/internal"
 	"time"
+
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -16,22 +18,23 @@ func main() {
 		time.Sleep(time.Second + 1)
 		currentCPUStats := cpustatistics.GetWorkload()
 		coreStats := cpustatistics.CalcCPUStats(currentCPUStats, previousCPUStats)
-		fmt.Println("Temperature Processors: ", coreStats.Temperature)
+		color.Red("Temperature Processors: %s", coreStats.Temperature)
+		fmt.Println()
 
 		for key, item := range coreStats.CoreLoad {
-			fmt.Printf("CPU %d Load: %s \n", key, item)
+			color.Green("CPU %d Load: %s \n", key, item)
 		}
 
 		fmt.Println()
-		fmt.Printf("Total Memory: %s GB \n", memoryinfo.GetTotalMemory())
-		fmt.Printf("Available Memory: %s GB \n", memoryinfo.GetMemAvailableMemory())
-		fmt.Printf("Active Memory: %s GB \n", memoryinfo.GetActiveMemory())
+		color.Yellow("Total Memory: %s GB \n", memoryinfo.GetTotalMemory())
+		color.Yellow("Available Memory: %s GB \n", memoryinfo.GetMemAvailableMemory())
+		color.Yellow("Active Memory: %s GB \n", memoryinfo.GetActiveMemory())
 
 		fmt.Println()
 
-		fmt.Printf("Total Space: %s GB\n", diskinfo.GetAllDisk())
-		fmt.Printf("Used Space: %s GB\n", diskinfo.GetUsedDisk())
-		fmt.Printf("Free Space: %s GB\n", diskinfo.GetFreeDisk())
+		color.Magenta("Total Space: %s GB\n", diskinfo.GetAllDisk())
+		color.Magenta("Used Space: %s GB\n", diskinfo.GetUsedDisk())
+		color.Magenta("Free Space: %s GB\n", diskinfo.GetFreeDisk())
 
 		fmt.Println()
 		duration := time.Since(cpuStatistic.BootTime)
@@ -39,7 +42,8 @@ func main() {
 		hours := int(duration.Hours()) % 24
 		minutes := int(duration.Minutes()) % 60
 		seconds := int(duration.Seconds()) % 60
-		fmt.Printf("Uptime: %d days, %d hours, %d minutes, %d seconds\n", days, hours, minutes, seconds)
+
+		color.Cyan("Uptime: %d days, %d hours, %d minutes, %d seconds\n", days, hours, minutes, seconds)
 		fmt.Println()
 	}
 }
