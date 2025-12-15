@@ -56,7 +56,7 @@ func getTemperatureProcessor(keySensors string) string {
 	return ""
 }
 
-func calcSingleCoreUsage(curr, prev linux.CPUStat, isPercantage bool) string {
+func calcSingleCoreUsage(curr, prev linux.CPUStat, isPercentage bool) string {
 
 	PrevIdle := prev.Idle + prev.IOWait
 	Idle := curr.Idle + curr.IOWait
@@ -72,7 +72,7 @@ func calcSingleCoreUsage(curr, prev linux.CPUStat, isPercantage bool) string {
 
 	CPULoad := (float64(totald) - float64(idled)) / float64(totald)
 
-	if !isPercantage {
+	if !isPercentage {
 		return fmt.Sprintf("%s", strconv.FormatFloat(CPULoad, 'f', 2, 64))
 	}
 

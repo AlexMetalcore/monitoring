@@ -19,15 +19,15 @@ func GetMemoryInfo() *linux.MemInfo {
 
 func GetTotalMemory() string {
 	info := GetMemoryInfo()
-	return strconv.FormatFloat(float64(info.MemTotal/1024/1024), 'f', 2, 64)
+	return strconv.FormatFloat(float64(info.MemTotal/1024), 'f', 2, 64)
 }
 
-func GetMemAvailableMemory() string {
+func GetAvailableMemory() string {
 	info := GetMemoryInfo()
-	return strconv.FormatFloat(float64(info.MemAvailable/1024/1024), 'f', 2, 64)
+	return strconv.FormatFloat(float64(info.MemAvailable/1024), 'f', 2, 64)
 }
 
 func GetActiveMemory() string {
 	info := GetMemoryInfo()
-	return strconv.FormatFloat(float64(info.Active/1024/1024), 'f', 2, 64)
+	return strconv.FormatFloat(float64(info.Active/1024), 'f', 2, 64)
 }
